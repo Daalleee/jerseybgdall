@@ -15,8 +15,10 @@ class DashboardController extends Controller
      */
     public function adminDashboard()
     {
+        $user = Auth::user();
+        
         // Hanya untuk admin
-        if (!Auth::user()->isAdmin()) {
+        if (!$user || $user->role !== 'admin') {
             abort(403, 'Akses ditolak.');
         }
 
@@ -40,8 +42,10 @@ class DashboardController extends Controller
      */
     public function customerDashboard()
     {
+        $user = Auth::user();
+        
         // Hanya untuk pelanggan
-        if (Auth::user()->isAdmin()) {
+        if (!$user || $user->role === 'admin') {
             abort(403, 'Akses ditolak.');
         }
 
