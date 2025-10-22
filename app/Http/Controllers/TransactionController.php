@@ -41,9 +41,14 @@ class TransactionController extends Controller
         ]);
 
         // Validasi ukuran yang dipilih tersedia
-        $availableSizes = $jersey->sizes ? json_decode($jersey->sizes, true) : [$jersey->size];
+        $availableSizes = $jersey->sizes ?: [$jersey->size];
         if (!in_array($request->size, $availableSizes)) {
             return redirect()->back()->withErrors(['size' => 'Ukuran yang dipilih tidak tersedia untuk jersey ini.'])->withInput();
+        }
+        
+        // Validasi stok tersedia
+        if (!$jersey->hasStock()) {
+            return redirect()->back()->withErrors(['stock' => 'Stok jersey ini habis.'])->withInput();
         }
 
         $paymentProofPath = null;
@@ -85,6 +90,34 @@ class TransactionController extends Controller
 
         return view('transactions.customer_transactions', compact('pembelian', 'penjualan'));
     }
+    
+    /**
+     * Tampilkan transaksi pembelian pelanggan
+     */
+    public function customerBoughtTransactions(Request $request)
+    {
+        $pembelian = Auth::user()->transactions()
+            ->where('type', 'pembelian')
+            ->with('jersey')
+            ->latest()
+            ->paginate(5);
+
+        return view('transactions.customer_bought', compact('pembelian'));
+    }
+    
+    /**
+     * Tampilkan transaksi penjualan pelanggan
+     */
+    public function customerSoldTransactions(Request $request)
+    {
+        $penjualan = Auth::user()->jerseys()
+            ->where('type', 'pelanggan')
+            ->with('transactions')
+            ->latest()
+            ->paginate(5);
+
+        return view('transactions.customer_sold', compact('penjualan'));
+    }
 
     /**
      * Tampilkan daftar transaksi untuk admin
@@ -121,6 +154,13 @@ class TransactionController extends Controller
         $currentPage = request('page', 1);
         $currentStatus = request('status', 'all');
         $currentSearch = request('search', '');
+        
+        // Hanya kurangi stok jika transaksi adalah pembelian dan masih pending
+        if ($transaction->type === 'pembelian' && $transaction->status === 'pending') {
+            // Kurangi stok jersey
+            $jersey = $transaction->jersey;
+            $jersey->reduceStock(1);
+        }
         
         $transaction->update([
             'status' => 'selesai'
