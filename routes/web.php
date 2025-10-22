@@ -22,6 +22,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('/customer/dashboard', [DashboardController::class, 'customerDashboard'])->name('customer.dashboard');
     
+    // Rute untuk profil pelanggan
+    Route::get('/customer/profile', function() {
+        return view('customer.profile');
+    })->name('customer.profile');
+    
     // Rute untuk jersey pelanggan (jual jersey)
     Route::get('/jerseys/sell', [JerseyController::class, 'showSellForm'])->name('jerseys.sell.form');
     Route::post('/jerseys/sell', [JerseyController::class, 'sellJersey'])->name('jerseys.sell');
@@ -30,8 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/transactions/buy/{jersey}', [TransactionController::class, 'showBuyForm'])->name('transactions.buy.form');
     Route::post('/transactions/buy/{jersey}', [TransactionController::class, 'buyJersey'])->name('transactions.buy');
     
-    // Rute untuk riwayat transaksi pelanggan
+    // Rute untuk transaksi pelanggan
     Route::get('/transactions', [TransactionController::class, 'customerTransactions'])->name('transactions.customer');
+    Route::get('/transactions/buy', [TransactionController::class, 'customerBoughtTransactions'])->name('transactions.customer.bought');
+    Route::get('/transactions/sell', [TransactionController::class, 'customerSoldTransactions'])->name('transactions.customer.sold');
     
     // Rute untuk jersey yang tersedia untuk dibeli (publik untuk yang sudah login sebagai pelanggan)
     Route::get('/available-jerseys', [JerseyController::class, 'availableJerseys'])->name('jerseys.available');
