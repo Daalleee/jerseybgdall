@@ -45,20 +45,11 @@ class DashboardController extends Controller
             abort(403, 'Akses ditolak.');
         }
 
-        $userTransactions = Auth::user()->transactions;
-        $boughtJerseys = Transaction::where('user_id', Auth::id())->where('type', 'pembelian')->get();
-        $soldJerseys = Transaction::where('user_id', Auth::id())->where('type', 'penjualan')->get();
-        
         // Hanya jersey sistem yang aktif
-        $availableJerseys = Jersey::where('status', 'aktif')->where('type', 'sistem')->limit(8)->get();
-        $availableJerseysCount = Jersey::where('status', 'aktif')->where('type', 'sistem')->count();
+        $availableJerseys = Jersey::where('status', 'aktif')->where('type', 'sistem')->get();
 
         return view('customer.dashboard', compact(
-            'userTransactions',
-            'boughtJerseys',
-            'soldJerseys',
-            'availableJerseys',
-            'availableJerseysCount'
+            'availableJerseys'
         ));
     }
 }
