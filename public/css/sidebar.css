@@ -1,0 +1,185 @@
+:root {
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 70px;
+    --topbar-height: 60px;
+}
+
+body {
+    padding-top: var(--topbar-height);
+    transition: padding-left 0.3s ease;
+}
+
+.sidebar {
+    position: fixed;
+    top: var(--topbar-height);
+    left: 0;
+    bottom: 0;
+    width: var(--sidebar-width);
+    background-color: #343a40;
+    color: white;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed-width);
+}
+
+.sidebar.collapsed .sidebar-text {
+    display: none;
+}
+
+.sidebar.collapsed .nav-link {
+    justify-content: center;
+}
+
+.sidebar.collapsed .nav-link span {
+    display: none;
+}
+
+.sidebar.collapsed .nav-link i {
+    margin-right: 0 !important;
+}
+
+/* Desktop sidebar toggle button (now in navbar) */
+.top-navbar .sidebar-toggle-btn {
+    position: static;
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.top-navbar .sidebar-toggle-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Mobile sidebar toggle button - overrides desktop position */
+@media (max-width: 767.98px) {
+    #mobileSidebarToggle {
+        position: absolute !important;
+        right: 15px !important;
+        margin-left: auto !important;
+    }
+    
+    #sidebarToggle {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    #mobileSidebarToggle {
+        display: none !important;
+    }
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+    margin-left: var(--sidebar-collapsed-width);
+}
+
+/* Adjust top navbar when sidebar is collapsed */
+body.sidebar-collapsed {
+    padding-left: var(--sidebar-collapsed-width);
+}
+
+.top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--topbar-height);
+    background-color: #0d6efd;
+    color: white;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.top-navbar .navbar-brand {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-left: 10px; /* Add margin to account for toggle button */
+}
+
+.top-navbar .navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.top-navbar .nav-link {
+    color: rgba(255,255,255,0.75);
+}
+
+.top-navbar .nav-link:hover {
+    color: white;
+}
+
+.top-navbar .sidebar-toggle-btn {
+    position: static;
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.top-navbar .sidebar-toggle-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Responsive adjustments - Mobile-friendly sidebar */
+@media (max-width: 767.98px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 250px !important; /* Override the CSS variable */
+        z-index: 1050;
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    /* Show mobile toggle button and hide desktop toggle button on smaller screens */
+    #sidebarToggle {
+        display: none !important;
+    }
+    
+    #mobileSidebarToggle {
+        display: block !important;
+    }
+}
+
+/* Show mobile toggle button only on mobile */
+#mobileSidebarToggle {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    z-index: 1050;
+    background-color: #0d6efd;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#mobileSidebarToggle:hover {
+    background-color: #0b5ed7;
+}

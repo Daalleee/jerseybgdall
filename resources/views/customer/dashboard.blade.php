@@ -6,77 +6,11 @@
 <div class="container">
     <h1 class="mb-4">Dashboard Pelanggan</h1>
     
-    <!-- Statistik -->
     <div class="row">
-        <div class="col-md-3 mb-3">
-            <div class="card bg-primary text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4>{{ $availableJerseysCount ?? 0 }}</h4>
-                            <p class="mb-0">Jersey Tersedia</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-tshirt fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card bg-success text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4>{{ count($boughtJerseys) }}</h4>
-                            <p class="mb-0">Jersey Beli</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-shopping-cart fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card bg-info text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4>{{ count($soldJerseys) }}</h4>
-                            <p class="mb-0">Jersey Jual</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-hand-holding-usd fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card bg-warning text-dark">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h4>{{ count($userTransactions) }}</h4>
-                            <p class="mb-0">Total Transaksi</p>
-                        </div>
-                        <div class="align-self-center">
-                            <i class="fas fa-exchange-alt fa-2x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Jersey Tersedia -->
-    <div class="row mt-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5>Semua Jersey Tersedia</h5>
-                    <a href="{{ route('jerseys.available') }}" class="btn btn-primary">Lihat Semua</a>
                 </div>
                 <div class="card-body">
                     @if($availableJerseys && $availableJerseys->count() > 0)

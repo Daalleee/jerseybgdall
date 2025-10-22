@@ -57,7 +57,7 @@
                                                 </span>
                                             @endforeach
                                         @elseif(isset($jersey) && $jersey->sizes)
-                                            @foreach(json_decode($jersey->sizes, true) as $size)
+                                            @foreach($jersey->sizes as $size)
                                                 <span class="badge bg-primary d-flex align-items-center">
                                                     {{ $size }}
                                                     <input type="hidden" name="sizes[]" value="{{ $size }}">
@@ -67,10 +67,10 @@
                                         @endif
                                     </div>
                                     <div class="d-flex flex-wrap gap-2" id="sizeOptions">
-                                        <button type="button" class="btn btn-outline-secondary size-btn" data-size="S" {{ (old('sizes') && in_array('S', old('sizes')) || (isset($jersey) && $jersey->sizes && in_array('S', json_decode($jersey->sizes, true)))) ? 'disabled' : '' }}>S</button>
-                                        <button type="button" class="btn btn-outline-secondary size-btn" data-size="M" {{ (old('sizes') && in_array('M', old('sizes')) || (isset($jersey) && $jersey->sizes && in_array('M', json_decode($jersey->sizes, true)))) ? 'disabled' : '' }}>M</button>
-                                        <button type="button" class="btn btn-outline-secondary size-btn" data-size="L" {{ (old('sizes') && in_array('L', old('sizes')) || (isset($jersey) && $jersey->sizes && in_array('L', json_decode($jersey->sizes, true)))) ? 'disabled' : '' }}>L</button>
-                                        <button type="button" class="btn btn-outline-secondary size-btn" data-size="XL" {{ (old('sizes') && in_array('XL', old('sizes')) || (isset($jersey) && $jersey->sizes && in_array('XL', json_decode($jersey->sizes, true)))) ? 'disabled' : '' }}>XL</button>
+                                        <button type="button" class="btn btn-outline-secondary size-btn" data-size="S" {{ (old('sizes') && in_array('S', old('sizes')) || (isset($jersey) && $jersey->sizes && in_array('S', $jersey->sizes))) ? 'disabled' : '' }}>S</button>
+                                        <button type="button" class="btn btn-outline-secondary size-btn" data-size="M" {{ (old('sizes') && in_array('M', old('sizes')) || (isset($jersey) && $jersey->sizes && in_array('M', $jersey->sizes))) ? 'disabled' : '' }}>M</button>
+                                        <button type="button" class="btn btn-outline-secondary size-btn" data-size="L" {{ (old('sizes') && in_array('L', old('sizes')) || (isset($jersey) && $jersey->sizes && in_array('L', $jersey->sizes))) ? 'disabled' : '' }}>L</button>
+                                        <button type="button" class="btn btn-outline-secondary size-btn" data-size="XL" {{ (old('sizes') && in_array('XL', old('sizes')) || (isset($jersey) && $jersey->sizes && in_array('XL', $jersey->sizes))) ? 'disabled' : '' }}>XL</button>
                                     </div>
                                     <div class="form-text">Klik ukuran untuk menambahkan, klik X untuk menghapus</div>
                                     @error('sizes')
@@ -85,6 +85,14 @@
                                         <option value="bekas" {{ (old('condition', $jersey->condition ?? '') == 'bekas') ? 'selected' : '' }}>Bekas</option>
                                     </select>
                                     @error('condition')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="stock" class="form-label">Stok</label>
+                                    <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock" value="{{ old('stock', $jersey->stock ?? 1) }}" min="1" required>
+                                    @error('stock')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

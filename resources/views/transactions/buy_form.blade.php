@@ -59,6 +59,11 @@
                     
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><strong>Harga:</strong> <span class="text-success fw-bold">Rp{{ number_format($jersey->price, 2, ',', '.') }}</span></li>
+                        <li class="list-group-item"><strong>Stok:</strong> 
+                            <span class="badge bg-{{ $jersey->hasStock() ? 'success' : 'danger' }} fs-6">
+                                {{ $jersey->stock }}
+                            </span>
+                        </li>
                         <li class="list-group-item"><strong>Kondisi:</strong> {{ ucfirst($jersey->condition) }}</li>
                         <li class="list-group-item"><strong>Penjual:</strong> 
                             @if($jersey->user)
@@ -86,7 +91,7 @@
                             <select class="form-select @error('size') is-invalid @enderror" id="size" name="size" required>
                                 <option value="">Pilih Ukuran...</option>
                                 @if($jersey->sizes)
-                                    @foreach(json_decode($jersey->sizes, true) as $size)
+                                    @foreach($jersey->sizes as $size)
                                         <option value="{{ $size }}" {{ old('size') == $size ? 'selected' : '' }}>
                                             {{ $size }}
                                         </option>

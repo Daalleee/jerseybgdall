@@ -32,10 +32,25 @@
                         <h5 class="card-title">{{ $jersey->name }}</h5>
                         <p class="text-success fw-bold fs-5">Rp{{ number_format($jersey->price, 2, ',', '.') }}</p>
                         
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-box"></i> Stok: 
+                                <span class="badge bg-{{ $jersey->hasStock() ? 'success' : 'danger' }} fs-6">
+                                    {{ $jersey->stock }}
+                                </span>
+                            </small>
+                        </div>
+                        
                         <div class="mt-auto">
-                            <a href="{{ route('transactions.buy.form', $jersey->id) }}" class="btn btn-primary w-100">
-                                <i class="fas fa-shopping-cart"></i> Beli Sekarang
-                            </a>
+                            @if($jersey->hasStock())
+                                <a href="{{ route('transactions.buy.form', $jersey->id) }}" class="btn btn-primary w-100">
+                                    <i class="fas fa-shopping-cart"></i> Beli Sekarang
+                                </a>
+                            @else
+                                <button class="btn btn-secondary w-100" disabled>
+                                    <i class="fas fa-shopping-cart"></i> Stok Habis
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </div>

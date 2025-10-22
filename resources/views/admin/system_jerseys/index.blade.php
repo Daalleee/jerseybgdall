@@ -30,6 +30,7 @@
                     <th>ID</th>
                     <th>Nama</th>
                     <th>Harga</th>
+                    <th>Stok</th>
                     <th>Ukuran Tersedia</th>
                     <th>Kondisi</th>
                     <th>Status</th>
@@ -44,6 +45,11 @@
                         <td>{{ $jersey->name }}</td>
                         <td><span class="text-success fw-bold">Rp{{ number_format($jersey->price, 2, ',', '.') }}</span></td>
                         <td>
+                            <span class="badge bg-{{ $jersey->hasStock() ? 'success' : 'danger' }} fs-6">
+                                {{ $jersey->stock }}
+                            </span>
+                        </td>
+                        <td>
                             @if($jersey->sizes)
                                 {{ $jersey->getAvailableSizesAttribute() }}
                             @else
@@ -53,7 +59,11 @@
                         <td>{{ ucfirst($jersey->condition) }}</td>
                         <td>
                             <span class="badge bg-{{ $jersey->status === 'aktif' ? 'success' : ($jersey->status === 'pending_review' ? 'warning' : 'danger') }} fs-6">
-                                {{ $jersey->status === 'aktif' ? 'Aktif' : ($jersey->status === 'pending_review' ? 'Menunggu Review' : 'Ditolak') }}
+                                @if($jersey->type === 'pelanggan')
+                                    {{ $jersey->status === 'aktif' ? 'Aktif (Disetujui)' : ($jersey->status === 'pending_review' ? 'Menunggu Review' : 'Ditolak') }}
+                                @else
+                                    {{ $jersey->display_status }}
+                                @endif
                             </span>
                         </td>
                         <td>{{ $jersey->created_at->format('d/m/Y H:i') }}</td>
