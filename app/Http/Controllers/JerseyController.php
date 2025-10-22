@@ -17,7 +17,7 @@ class JerseyController extends Controller
     public function availableJerseys(Request $request)
     {
         // Hanya menampilkan jersey sistem yang aktif
-        $query = Jersey::aktif()->with('user')->where('type', 'sistem');
+        $query = Jersey::sistemAktif()->with('user');
         
         if ($request->has('search') && $request->search) {
             $query->where('name', 'like', '%' . $request->search . '%');
@@ -73,7 +73,8 @@ class JerseyController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'size' => $request->size,
-            'sizes' => json_encode([$request->size]), // Simpan ukuran yang dipilih sebagai array
+            'sizes' => [$request->size], // Simpan ukuran yang dipilih sebagai array
+            'stock' => 1, // Default stok 1 untuk jersey pelanggan
             'condition' => $request->condition,
             'address' => $request->address,
             'phone_number' => $request->phone_number,
@@ -162,6 +163,7 @@ class JerseyController extends Controller
             'price' => 'required|numeric|min:0',
             'sizes' => 'required|array',
             'sizes.*' => 'in:S,M,L,XL',
+            'stock' => 'required|integer|min:1',
             'condition' => 'required|in:baru,bekas',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -177,6 +179,7 @@ class JerseyController extends Controller
             'price' => $request->price,
             'size' => $request->sizes[0], // Simpan ukuran pertama sebagai ukuran utama
             'sizes' => $request->sizes, // Simpan semua ukuran yang tersedia
+            'stock' => $request->stock,
             'condition' => $request->condition,
             'type' => 'sistem',
             'status' => 'aktif',
@@ -194,6 +197,11 @@ class JerseyController extends Controller
      */
     public function adminEdit(Jersey $jersey)
     {
+        // Hanya jersey sistem yang bisa diedit oleh admin
+        if ($jersey->type !== 'sistem') {
+            abort(403, 'Anda tidak dapat mengedit jersey pelanggan.');
+        }
+        
         return view('admin.jersey_form', compact('jersey'));
     }
 
@@ -202,12 +210,18 @@ class JerseyController extends Controller
      */
     public function adminUpdate(Request $request, Jersey $jersey)
     {
+        // Hanya jersey sistem yang bisa diupdate oleh admin
+        if ($jersey->type !== 'sistem') {
+            abort(403, 'Anda tidak dapat mengupdate jersey pelanggan.');
+        }
+        
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'sizes' => 'required|array',
             'sizes.*' => 'in:S,M,L,XL',
+            'stock' => 'required|integer|min:1',
             'condition' => 'required|in:baru,bekas',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -228,6 +242,7 @@ class JerseyController extends Controller
             'price' => $request->price,
             'size' => $request->sizes[0], // Simpan ukuran pertama sebagai ukuran utama
             'sizes' => $request->sizes, // Simpan semua ukuran yang tersedia
+            'stock' => $request->stock,
             'condition' => $request->condition,
             'photo' => $photoPath,
         ]);

@@ -24,6 +24,7 @@ class Jersey extends Model
         'type',
         'user_id',
         'sizes',
+        'stock',
     ];
 
     protected $casts = [
@@ -74,6 +75,22 @@ class Jersey extends Model
     public function scopeAktif($query)
     {
         return $query->where('status', 'aktif');
+    }
+    
+    /**
+     * Scope untuk jersey sistem yang aktif
+     */
+    public function scopeSistemAktif($query)
+    {
+        return $query->where('status', 'aktif')->where('type', 'sistem');
+    }
+    
+    /**
+     * Scope untuk jersey pelanggan yang disetujui
+     */
+    public function scopePelangganDisetujui($query)
+    {
+        return $query->where('status', 'aktif')->where('type', 'pelanggan');
     }
 
     /**
@@ -136,7 +153,14 @@ class Jersey extends Model
             return $this->size === $size; // Fallback ke field size lama
         }
         
-        return in_array($size, $this->sizes);
+        // Jika sizes berupa string (JSON dari database), decode dulu
+        $sizesArray = is_string($this->sizes) ? json_decode($this->sizes, true) : $this->sizes;
+        
+        if (!is_array($sizesArray)) {
+            return $this->size === $size; // Fallback jika decode gagal
+        }
+        
+        return in_array($size, $sizesArray);
     }
     
     /**
@@ -157,5 +181,37 @@ class Jersey extends Model
         }
         
         return $photos;
+    }
+    
+    /**
+     * Mendapatkan status yang ditampilkan berdasarkan tipe jersey
+     */
+    public function getDisplayStatusAttribute(): string
+    {
+        if ($this->type === 'pelanggan') {
+            return $this->status === 'aktif' ? 'Disetujui' : 
+                   ($this->status === 'pending_review' ? 'Menunggu Review' : 'Ditolak');
+        } else {
+            return $this->status === 'aktif' ? 'Aktif' : 
+                   ($this->status === 'pending_review' ? 'Menunggu Review' : 'Ditolak');
+        }
+    }
+    
+    /**
+     * Cek apakah stok tersedia
+     */
+    public function hasStock(int $quantity = 1): bool
+    {
+        return $this->stock >= $quantity;
+    }
+    
+    /**
+     * Kurangi stok jersey
+     */
+    public function reduceStock(int $quantity = 1): void
+    {
+        if ($this->hasStock($quantity)) {
+            $this->update(['stock' => $this->stock - $quantity]);
+        }
     }
 }
