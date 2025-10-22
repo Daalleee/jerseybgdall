@@ -74,7 +74,9 @@ class TransactionController extends Controller
      */
     public function customerTransactions(Request $request)
     {
-        $pembelian = Auth::user()->transactions()
+        $userId = Auth::id();
+        
+        $pembelian = Transaction::where('user_id', $userId)
             ->where('type', 'pembelian')
             ->with('jersey')
             ->latest()
@@ -82,7 +84,7 @@ class TransactionController extends Controller
         
         // Untuk penjualan, kita ambil jersey yang dibuat oleh pelanggan ini (bukan transaksi)
         // Hanya jersey dari pelanggan sendiri
-        $penjualan = Auth::user()->jerseys()
+        $penjualan = Jersey::where('user_id', $userId)
             ->where('type', 'pelanggan')
             ->with('transactions')
             ->latest()
@@ -96,7 +98,9 @@ class TransactionController extends Controller
      */
     public function customerBoughtTransactions(Request $request)
     {
-        $pembelian = Auth::user()->transactions()
+        $userId = Auth::id();
+
+        $pembelian = Transaction::where('user_id', $userId)
             ->where('type', 'pembelian')
             ->with('jersey')
             ->latest()
@@ -110,7 +114,9 @@ class TransactionController extends Controller
      */
     public function customerSoldTransactions(Request $request)
     {
-        $penjualan = Auth::user()->jerseys()
+        $userId = Auth::id();
+
+        $penjualan = Jersey::where('user_id', $userId)
             ->where('type', 'pelanggan')
             ->with('transactions')
             ->latest()
