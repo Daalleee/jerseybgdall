@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Transaction;
 
@@ -25,6 +26,7 @@ class Jersey extends Model
         'user_id',
         'sizes',
         'stock',
+        'slug',
     ];
 
     protected $casts = [
@@ -32,6 +34,56 @@ class Jersey extends Model
         'sizes' => 'array', // Casting untuk menyimpan array ukuran
         'additional_photos' => 'array', // Casting untuk menyimpan array foto tambahan
     ];
+
+    /**
+     * Boot the model and set up events
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($jersey) {
+            if ($jersey->type === 'sistem') {
+                $jersey->slug = static::generateSystemJerseyCode();
+            } else {
+                $jersey->slug = static::generateCustomerJerseyCode();
+            }
+        });
+    }
+
+    /**
+     * Generate a unique system jersey code (JS + 2 digits)
+     */
+    protected static function generateSystemJerseyCode()
+    {
+        $attempts = 0;
+        do {
+            $number = rand(1, 99);
+            $code = 'JS' . str_pad($number, 2, '0', STR_PAD_LEFT);
+            $attempts++;
+            // Prevent infinite loops
+            if ($attempts > 10000) break;
+        } while (static::where('slug', $code)->exists());
+
+        return $code;
+    }
+
+    /**
+     * Generate a unique customer jersey code (JC + 2 digits)
+     */
+    protected static function generateCustomerJerseyCode()
+    {
+        $attempts = 0;
+        do {
+            $number = rand(1, 99);
+            $code = 'JC' . str_pad($number, 2, '0', STR_PAD_LEFT);
+            $attempts++;
+            // Prevent infinite loops
+            if ($attempts > 10000) break;
+        } while (static::where('slug', $code)->exists());
+
+        return $code;
+    }
 
     /**
      * Accessor untuk additional_photos
@@ -213,5 +265,13 @@ class Jersey extends Model
         if ($this->hasStock($quantity)) {
             $this->update(['stock' => $this->stock - $quantity]);
         }
+    }
+
+    /**
+     * Get the route key for Laravel model binding
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
