@@ -30,7 +30,7 @@
                             @if(count($allPhotos) > 0)
                                 @foreach($allPhotos as $index => $photoPath)
                                     <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                        <img src="{{ asset('storage/' . $photoPath) }}" class="d-block w-100" style="height: 300px; object-fit: cover;" alt="Foto {{ $index + 1 }}">
+                                        <img src="{{ asset('storage/' . $photoPath) }}" class="d-block w-100" style="height: 300px; object-fit: contain; background-color: #f8f9fa;" alt="Foto {{ $index + 1 }}">
                                     </div>
                                 @endforeach
                             @else

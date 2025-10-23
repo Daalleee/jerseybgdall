@@ -24,7 +24,7 @@
                                                 $allPhotos = $jersey->getAllPhotosAttribute();
                                             @endphp
                                             @if(!empty($allPhotos))
-                                                <img src="{{ asset('storage/' . $allPhotos[0]) }}" class="card-img-top" alt="{{ $jersey->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                                <img src="{{ asset('storage/' . $allPhotos[0]) }}" class="card-img-top" alt="{{ $jersey->name }}" style="width: 100%; height: 100%; object-fit: contain; background-color: #f8f9fa;">
                                                 @if(count($allPhotos) > 1)
                                                     <div class="position-absolute bottom-0 end-0 bg-primary text-white px-2 py-1 rounded-start" style="font-size: 0.7rem;">
                                                         <i class="fas fa-images"></i> {{ count($allPhotos) }}
