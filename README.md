@@ -4,81 +4,88 @@ JerseyDall adalah aplikasi web berbasis Laravel yang dirancang khusus untuk kebu
 
 ## Daftar Isi
 
-- [Fitur Utama](#fitur-utama)
-- [Teknologi yang Digunakan](#teknologi-yang-digunakan)
-- [Prasyarat Sistem](#prasyarat-sistem)
-- [Instalasi](#instalasi)
-- [Konfigurasi](#konfigurasi)
-- [Penggunaan](#penggunaan)
-- [Struktur Proyek](#struktur-proyek)
-- [Database](#database)
-- [API dan Fungsi Penting](#api-dan-fungsi-penting)
-- [Pengembangan](#pengembangan)
-- [Testing](#testing)
-- [Deployment](#deployment)
-- [Kontribusi](#kontribusi)
-- [Lisensi](#lisensi)
-- [Dukungan dan Masalah](#dukungan-dan-masalah)
+-   [Fitur Utama](#fitur-utama)
+-   [Teknologi yang Digunakan](#teknologi-yang-digunakan)
+-   [Prasyarat Sistem](#prasyarat-sistem)
+-   [Instalasi](#instalasi)
+-   [Konfigurasi](#konfigurasi)
+-   [Penggunaan](#penggunaan)
+-   [Struktur Proyek](#struktur-proyek)
+-   [Database](#database)
+-   [API dan Fungsi Penting](#api-dan-fungsi-penting)
+-   [Pengembangan](#pengembangan)
+-   [Testing](#testing)
+-   [Deployment](#deployment)
+-   [Kontribusi](#kontribusi)
+-   [Lisensi](#lisensi)
+-   [Dukungan dan Masalah](#dukungan-dan-masalah)
 
 ## Fitur Utama
 
 ### 1. Sistem Multi-Role
-- **Admin**: Mengelola platform, verifikasi jersey pelanggan, mengelola transaksi, dan mengawasi aktivitas pengguna
-- **Pelanggan**: Membeli jersey, menjual jersey milik mereka, mengelola profil dan transaksi
+
+-   **Admin**: Mengelola platform, verifikasi jersey pelanggan, mengelola transaksi, dan mengawasi aktivitas pengguna
+-   **Pelanggan**: Membeli jersey, menjual jersey milik mereka, mengelola profil dan transaksi
 
 ### 2. Fitur Jual Beli Jersey
-- **Fitur Jual Jersey**: Pelanggan dapat mengupload jersey yang ingin dijual dengan foto dan deskripsi lengkap
-- **Fitur Beli Jersey**: Pelanggan dapat membeli jersey dari sistem atau dari pelanggan lain
-- **Verifikasi Manual**: Setiap transaksi diverifikasi secara manual oleh admin untuk keamanan dan kepercayaan
+
+-   **Fitur Jual Jersey**: Pelanggan dapat mengupload jersey yang ingin dijual dengan foto dan deskripsi lengkap
+-   **Fitur Beli Jersey**: Pelanggan dapat membeli jersey dari sistem atau dari pelanggan lain
+-   **Verifikasi Manual**: Setiap transaksi diverifikasi secara manual oleh admin untuk keamanan dan kepercayaan
 
 ### 3. Manajemen Produk
-- **Jersey Sistem**: Jersey yang diupload oleh admin untuk penjualan langsung
-- **Jersey Pelanggan**: Jersey yang diupload oleh pengguna untuk dijual
-- **Manajemen Stok**: Sistem pengelolaan stok yang akurat untuk setiap jersey
+
+-   **Jersey Sistem**: Jersey yang diupload oleh admin untuk penjualan langsung
+-   **Jersey Pelanggan**: Jersey yang diupload oleh pengguna untuk dijual
+-   **Manajemen Stok**: Sistem pengelolaan stok yang akurat untuk setiap jersey
 
 ### 4. Dashboard
-- **Dashboard Admin**: Menampilkan statistik platform, daftar transaksi, jersey yang menunggu verifikasi, dan pengelolaan pengguna
-- **Dashboard Pelanggan**: Menampilkan jersey tersedia, riwayat pembelian, penjualan, dan informasi akun
+
+-   **Dashboard Admin**: Menampilkan statistik platform, daftar transaksi, jersey yang menunggu verifikasi, dan pengelolaan pengguna
+-   **Dashboard Pelanggan**: Menampilkan jersey tersedia, riwayat pembelian, penjualan, dan informasi akun
 
 ### 5. Sistem Transaksi
-- **Status Transaksi**: Setiap transaksi memiliki status (pending, selesai, ditolak) untuk transparansi
-- **Bukti Pembayaran**: Upload bukti pembayaran untuk konfirmasi transaksi
-- **Alur Transaksi**: Proses transaksi yang jelas dan terdokumentasi
+
+-   **Status Transaksi**: Setiap transaksi memiliki status (pending, selesai, ditolak) untuk transparansi
+-   **Bukti Pembayaran**: Upload bukti pembayaran untuk konfirmasi transaksi
+-   **Alur Transaksi**: Proses transaksi yang jelas dan terdokumentasi
 
 ### 6. Manajemen Pengguna
-- **Autentikasi**: Sistem login/register dengan validasi
-- **Profil Pengguna**: Setiap pengguna dapat mengelola informasi pribadi mereka
+
+-   **Autentikasi**: Sistem login/register dengan validasi
+-   **Profil Pengguna**: Setiap pengguna dapat mengelola informasi pribadi mereka
 
 ### 7. Tampilan Responsif
-- **Mobile-Friendly**: Tampilan yang responsif untuk perangkat mobile dan desktop
-- **UI/UX yang Intuitif**: Desain yang mudah digunakan dan menarik
+
+-   **Mobile-Friendly**: Tampilan yang responsif untuk perangkat mobile dan desktop
+-   **UI/UX yang Intuitif**: Desain yang mudah digunakan dan menarik
 
 ## Teknologi yang Digunakan
 
-- **Backend**: Laravel 12.x
-- **Database**: MySQL
-- **Frontend**: Bootstrap 5, JavaScript
-- **CSS Framework**: Bootstrap 5
-- **Icon**: Font Awesome
-- **Development Server**: Artisan (Laravel)
-- **Dependency Management**: Composer (PHP)
+-   **Backend**: Laravel 12.x
+-   **Database**: MySQL
+-   **Frontend**: Bootstrap 5, JavaScript
+-   **CSS Framework**: Bootstrap 5
+-   **Icon**: Font Awesome
+-   **Development Server**: Artisan (Laravel)
+-   **Dependency Management**: Composer (PHP)
 
 ## Prasyarat Sistem
 
 Sebelum Anda memulai, pastikan sistem Anda memiliki:
 
-- PHP >= 8.2
-- Composer
-- MySQL (atau database lain yang didukung Laravel)
-- Node.js (untuk opsi development frontend assets)
-- NPM atau Yarn
+-   PHP >= 8.2
+-   Composer
+-   MySQL (atau database lain yang didukung Laravel)
+-   Node.js (untuk opsi development frontend assets)
+-   NPM atau Yarn
 
 ## Instalasi
 
 ### 1. Clone Repository
 
 ```bash
-git clone <URL_REPOSITORY_ANDA>
+git clone https://github.com/Daalleee/jerseybgdall.git
 cd jerseybgdall
 ```
 
@@ -144,46 +151,46 @@ Aplikasi akan tersedia di `http://127.0.0.1:8000`
 
 Beberapa konfigurasi penting dalam file `.env`:
 
-- `APP_NAME`: Nama aplikasi
-- `APP_ENV`: Lingkungan (local, production)
-- `APP_KEY`: Kunci aplikasi (dihasilkan secara otomatis)
-- `DB_*`: Konfigurasi database
-- `MAIL_*`: Konfigurasi email (jika diperlukan)
-- `CACHE_*`: Konfigurasi cache (jika diperlukan)
+-   `APP_NAME`: Nama aplikasi
+-   `APP_ENV`: Lingkungan (local, production)
+-   `APP_KEY`: Kunci aplikasi (dihasilkan secara otomatis)
+-   `DB_*`: Konfigurasi database
+-   `MAIL_*`: Konfigurasi email (jika diperlukan)
+-   `CACHE_*`: Konfigurasi cache (jika diperlukan)
 
 ### Konfigurasi Tambahan
 
-- **Storage**: File gambar jersey disimpan di `storage/app/public` dan diakses melalui `/storage`
-- **Cache**: Gunakan `php artisan config:cache` untuk produksi
-- **Route Cache**: Gunakan `php artisan route:cache` untuk produksi
+-   **Storage**: File gambar jersey disimpan di `storage/app/public` dan diakses melalui `/storage`
+-   **Cache**: Gunakan `php artisan config:cache` untuk produksi
+-   **Route Cache**: Gunakan `php artisan route:cache` untuk produksi
 
 ## Penggunaan
 
 ### 1. Registrasi & Login
 
-- Akses halaman `/register` untuk mendaftar akun baru
-- Akses halaman `/login` untuk login ke sistem
-- Pengguna default akan dibuat saat seeding
+-   Akses halaman `/register` untuk mendaftar akun baru
+-   Akses halaman `/login` untuk login ke sistem
+-   Pengguna default akan dibuat saat seeding
 
 ### 2. Untuk Admin
 
-- Login sebagai admin (akun dengan role `admin`)
-- Akses dashboard admin di `/admin/dashboard`
-- Kelola jersey sistem dan jersey dari pelanggan
-- Verifikasi transaksi dan kelola pengguna
+-   Login sebagai admin (akun dengan role `admin`)
+-   Akses dashboard admin di `/admin/dashboard`
+-   Kelola jersey sistem dan jersey dari pelanggan
+-   Verifikasi transaksi dan kelola pengguna
 
 ### 3. Untuk Pelanggan
 
-- Login sebagai pelanggan
-- Jelajahi jersey yang tersedia di `/available-jerseys`
-- Jual jersey dengan mengakses `/jerseys/sell`
-- Lihat riwayat transaksi di `/transactions`
+-   Login sebagai pelanggan
+-   Jelajahi jersey yang tersedia di `/available-jerseys`
+-   Jual jersey dengan mengakses `/jerseys/sell`
+-   Lihat riwayat transaksi di `/transactions`
 
 ### 4. Fitur Utama
 
-- **Jual Jersey**: Upload jersey Anda sendiri untuk dijual
-- **Beli Jersey**: Beli jersey dari sistem atau dari pelanggan lain
-- **Verifikasi Transaksi**: Setiap transaksi melalui proses verifikasi manual
+-   **Jual Jersey**: Upload jersey Anda sendiri untuk dijual
+-   **Beli Jersey**: Beli jersey dari sistem atau dari pelanggan lain
+-   **Verifikasi Transaksi**: Setiap transaksi melalui proses verifikasi manual
 
 ## Struktur Proyek
 
@@ -226,87 +233,96 @@ Beberapa konfigurasi penting dalam file `.env`:
 ### Skema Database Penting
 
 #### 1. users
-- id
-- name
-- email
-- password
-- role (admin/pelanggan)
-- phone_number
-- address
-- created_at
-- updated_at
+
+-   id
+-   name
+-   email
+-   password
+-   role (admin/pelanggan)
+-   phone_number
+-   address
+-   created_at
+-   updated_at
 
 #### 2. jerseys
-- id
-- user_id (foreign key ke users, NULL untuk jersey sistem)
-- name
-- description
-- price
-- stock
-- photo (gambar utama)
-- additional_photos (JSON array untuk foto tambahan)
-- type (sistem/pelanggan)
-- status (aktif, pending_review, ditolak)
-- size
-- sizes (JSON array untuk beberapa ukuran)
-- created_at
-- updated_at
-- slug
+
+-   id
+-   user_id (foreign key ke users, NULL untuk jersey sistem)
+-   name
+-   description
+-   price
+-   stock
+-   photo (gambar utama)
+-   additional_photos (JSON array untuk foto tambahan)
+-   type (sistem/pelanggan)
+-   status (aktif, pending_review, ditolak)
+-   size
+-   sizes (JSON array untuk beberapa ukuran)
+-   created_at
+-   updated_at
+-   slug
 
 #### 3. transactions
-- id
-- jersey_id (foreign key ke jerseys)
-- user_id (foreign key ke users - pembeli)
-- buyer_address
-- buyer_phone
-- payment_proof
-- type (pembelian/penjualan)
-- status (pending/selesai/ditolak)
-- created_at
-- updated_at
-- transaction_code (kode unik)
+
+-   id
+-   jersey_id (foreign key ke jerseys)
+-   user_id (foreign key ke users - pembeli)
+-   buyer_address
+-   buyer_phone
+-   payment_proof
+-   type (pembelian/penjualan)
+-   status (pending/selesai/ditolak)
+-   created_at
+-   updated_at
+-   transaction_code (kode unik)
 
 #### 4. jersey_photos
-- id
-- jersey_id (foreign key ke jerseys)
-- photo_path
-- created_at
-- updated_at
+
+-   id
+-   jersey_id (foreign key ke jerseys)
+-   photo_path
+-   created_at
+-   updated_at
 
 ## API dan Fungsi Penting
 
 ### Controller Utama
 
 #### DashboardController
-- `adminDashboard()`: Dashboard untuk admin
-- `customerDashboard()`: Dashboard untuk pelanggan
+
+-   `adminDashboard()`: Dashboard untuk admin
+-   `customerDashboard()`: Dashboard untuk pelanggan
 
 #### JerseyController
-- `availableJerseys()`: Menampilkan jersey yang tersedia untuk dibeli
-- `showSellForm()`: Menampilkan form untuk menjual jersey
-- `sellJersey()`: Menyimpan jersey yang akan dijual oleh pelanggan
-- `adminIndex()`: Daftar semua jersey untuk admin
-- `adminCreate()`, `adminStore()`, `adminEdit()`, `adminUpdate()`, `adminDestroy()`: CRUD jersey untuk admin
-- `approveJersey()`, `rejectJersey()`: Fungsi verifikasi jersey dari pelanggan
+
+-   `availableJerseys()`: Menampilkan jersey yang tersedia untuk dibeli
+-   `showSellForm()`: Menampilkan form untuk menjual jersey
+-   `sellJersey()`: Menyimpan jersey yang akan dijual oleh pelanggan
+-   `adminIndex()`: Daftar semua jersey untuk admin
+-   `adminCreate()`, `adminStore()`, `adminEdit()`, `adminUpdate()`, `adminDestroy()`: CRUD jersey untuk admin
+-   `approveJersey()`, `rejectJersey()`: Fungsi verifikasi jersey dari pelanggan
 
 #### TransactionController
-- `showBuyForm()`: Menampilkan form pembelian
-- `buyJersey()`: Proses pembelian jersey
-- `customerTransactions()`: Riwayat transaksi pelanggan
-- `customerBoughtTransactions()`, `customerSoldTransactions()`: Rincian transaksi
-- `adminIndex()`: Daftar semua transaksi untuk admin
-- `approveTransaction()`, `rejectTransaction()`: Fungsi verifikasi transaksi
+
+-   `showBuyForm()`: Menampilkan form pembelian
+-   `buyJersey()`: Proses pembelian jersey
+-   `customerTransactions()`: Riwayat transaksi pelanggan
+-   `customerBoughtTransactions()`, `customerSoldTransactions()`: Rincian transaksi
+-   `adminIndex()`: Daftar semua transaksi untuk admin
+-   `approveTransaction()`, `rejectTransaction()`: Fungsi verifikasi transaksi
 
 ### Model Penting
 
 #### Jersey Model
-- Relasi ke `user`, `transactions`, `photos`
-- Scope untuk filter: `aktif()`, `sistemAktif()`, `pelangganDisetujui()`
-- Method `hasSize()`, `hasStock()`, `reduceStock()`, `getAllPhotosAttribute()`
+
+-   Relasi ke `user`, `transactions`, `photos`
+-   Scope untuk filter: `aktif()`, `sistemAktif()`, `pelangganDisetujui()`
+-   Method `hasSize()`, `hasStock()`, `reduceStock()`, `getAllPhotosAttribute()`
 
 #### Transaction Model
-- Relasi ke `jersey`, `user`
-- Method `isPurchase()`, `isSale()`, `isPending()`, `isCompleted()`, `isRejected()`
+
+-   Relasi ke `jersey`, `user`
+-   Method `isPurchase()`, `isSale()`, `isPending()`, `isCompleted()`, `isRejected()`
 
 ## Pengembangan
 
@@ -321,11 +337,11 @@ Beberapa konfigurasi penting dalam file `.env`:
 
 ### Gaya Penulisan Kode
 
-- Ikuti standar PSR-12 untuk PHP
-- Gunakan type hinting dan return type
-- Gunakan model relationship dengan benar
-- Gunakan form request untuk validasi input
-- Gunakan resource untuk API response (jika diperlukan)
+-   Ikuti standar PSR-12 untuk PHP
+-   Gunakan type hinting dan return type
+-   Gunakan model relationship dengan benar
+-   Gunakan form request untuk validasi input
+-   Gunakan resource untuk API response (jika diperlukan)
 
 ## Testing
 
@@ -341,31 +357,34 @@ php artisan test --coverage
 
 ### Jenis-jenis Test
 
-- **Feature Tests**: Pengujian end-to-end
-- **Unit Tests**: Pengujian komponen individual
+-   **Feature Tests**: Pengujian end-to-end
+-   **Unit Tests**: Pengujian komponen individual
 
 ## Deployment
 
 ### Server Production
 
 1. **Konfigurasi Environment**:
-   - Set `APP_ENV=production`
-   - Set `APP_DEBUG=false`
-   - Konfigurasi database
+
+    - Set `APP_ENV=production`
+    - Set `APP_DEBUG=false`
+    - Konfigurasi database
 
 2. **Optimasi Aplikasi**:
-   ```bash
-   php artisan config:cache
-   php artisan route:cache
-   php artisan view:cache
-   ```
+
+    ```bash
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
+    ```
 
 3. **Setup Web Server**:
-   - Arahkan document root ke folder `public/`
-   - Konfigurasi rewrite rules untuk Laravel
+
+    - Arahkan document root ke folder `public/`
+    - Konfigurasi rewrite rules untuk Laravel
 
 4. **Cron Jobs** (jika diperlukan):
-   - Tambahkan cron job untuk queue worker
+    - Tambahkan cron job untuk queue worker
 
 ## Kontribusi
 
@@ -381,10 +400,10 @@ Terima kasih atas minat Anda untuk berkontribusi pada proyek ini!
 
 ### Standar Kontribusi
 
-- Ikuti gaya penulisan kode yang konsisten
-- Pastikan semua test melewati
-- Dokumentasikan perubahan yang Anda buat
-- Gunakan commit message yang jelas dan deskriptif
+-   Ikuti gaya penulisan kode yang konsisten
+-   Pastikan semua test melewati
+-   Dokumentasikan perubahan yang Anda buat
+-   Gunakan commit message yang jelas dan deskriptif
 
 ## Lisensi
 
@@ -402,9 +421,9 @@ Jika Anda menemukan bug atau memiliki saran fitur:
 
 ### Dukungan
 
-- **Email**: [alamat_email_support@jerseydall.com]
-- **Forum**: [link_forum_dukungan]
-- **Documentation**: [link_dokumentasi_lengkap]
+-   **Email**: [alamat_email_support@jerseydall.com]
+-   **Forum**: [link_forum_dukungan]
+-   **Documentation**: [link_dokumentasi_lengkap]
 
 ---
 
