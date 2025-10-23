@@ -43,7 +43,7 @@
                         
                         <div class="mt-auto">
                             @if($jersey->hasStock())
-                                <a href="{{ route('transactions.buy.form', $jersey->id) }}" class="btn btn-primary w-100">
+                                <a href="{{ route('transactions.buy.form', $jersey->slug) }}" class="btn btn-primary w-100">
                                     <i class="fas fa-shopping-cart"></i> Beli Sekarang
                                 </a>
                             @else

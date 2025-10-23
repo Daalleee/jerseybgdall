@@ -24,7 +24,7 @@
                         <tbody>
                             @foreach($penjualan as $jersey)
                             <tr>
-                                <td>#{{ $jersey->id }}</td>
+                                <td>{{ $jersey->slug }}</td>
                                 <td>{{ $jersey->name }}</td>
                                 <td><span class="text-success fw-bold">Rp{{ number_format($jersey->price, 2, ',', '.') }}</span></td>
                                 <td>

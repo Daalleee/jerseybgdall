@@ -39,7 +39,7 @@
                                         <div class="card-body d-flex flex-column">
                                             <h6 class="card-title">{{ Str::limit($jersey->name, 20) }}</h6>
                                             <p class="text-success fw-bold">Rp{{ number_format($jersey->price, 2, ',', '.') }}</p>
-                                            <a href="{{ route('transactions.buy.form', $jersey->id) }}" class="btn btn-primary btn-sm mt-auto">
+                                            <a href="{{ route('transactions.buy.form', $jersey->slug) }}" class="btn btn-primary btn-sm mt-auto">
                                                 <i class="fas fa-shopping-cart"></i> Beli
                                             </a>
                                         </div>

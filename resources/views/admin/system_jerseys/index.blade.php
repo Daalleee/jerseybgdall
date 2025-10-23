@@ -41,7 +41,7 @@
             <tbody>
                 @forelse($jerseys as $jersey)
                     <tr>
-                        <td>{{ $jersey->id }}</td>
+                        <td>{{ $jersey->slug }}</td>
                         <td>{{ $jersey->name }}</td>
                         <td><span class="text-success fw-bold">Rp{{ number_format($jersey->price, 2, ',', '.') }}</span></td>
                         <td>
@@ -69,7 +69,7 @@
                         <td>{{ $jersey->created_at->format('d/m/Y H:i') }}</td>
                         <td>
                             <div class="d-flex flex-column gap-2">
-                                <a href="{{ route('admin.jerseys.edit', $jersey->id) }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('admin.jerseys.edit', $jersey->slug) }}" class="btn btn-primary btn-sm">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
                                 
@@ -78,12 +78,12 @@
                                     $allPhotos = $jersey->getAllPhotosAttribute();
                                 @endphp
                                 @if(count($allPhotos) > 0)
-                                    <button type="button" class="btn btn-info btn-sm w-100" data-bs-toggle="modal" data-bs-target="#photosModal{{ $jersey->id }}">
+                                    <button type="button" class="btn btn-info btn-sm w-100" data-bs-toggle="modal" data-bs-target="#photosModal{{ $jersey->slug }}">
                                         <i class="fas fa-images"></i> Lihat Foto ({{ count($allPhotos) }})
                                     </button>
                                 @endif
                                 
-                                <form action="{{ route('admin.jerseys.destroy', $jersey->id) }}" method="POST">
+                                <form action="{{ route('admin.jerseys.destroy', $jersey->slug) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-outline-danger btn-sm w-100" onclick="return confirm('Yakin ingin menghapus jersey ini?')">
@@ -99,18 +99,18 @@
                         $allPhotos = $jersey->getAllPhotosAttribute();
                     @endphp
                     @if(count($allPhotos) > 0)
-                        <div class="modal fade" id="photosModal{{ $jersey->id }}" tabindex="-1" aria-labelledby="photosModalLabel{{ $jersey->id }}" aria-hidden="true">
+                        <div class="modal fade" id="photosModal{{ $jersey->slug }}" tabindex="-1" aria-labelledby="photosModalLabel{{ $jersey->slug }}" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="photosModalLabel{{ $jersey->id }}">Foto - {{ $jersey->name }}</h5>
+                                        <h5 class="modal-title" id="photosModalLabel{{ $jersey->slug }}">Foto - {{ $jersey->name }}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <div id="photosCarousel{{ $jersey->id }}" class="carousel slide" data-bs-ride="carousel">
+                                        <div id="photosCarousel{{ $jersey->slug }}" class="carousel slide" data-bs-ride="carousel">
                                             <div class="carousel-indicators">
                                                 @foreach($allPhotos as $index => $photoPath)
-                                                    <button type="button" data-bs-target="#photosCarousel{{ $jersey->id }}" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : '' }}" aria-label="Slide {{ $index + 1 }}"></button>
+                                                    <button type="button" data-bs-target="#photosCarousel{{ $jersey->slug }}" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : '' }}" aria-label="Slide {{ $index + 1 }}"></button>
                                                 @endforeach
                                             </div>
                                             <div class="carousel-inner">
@@ -121,11 +121,11 @@
                                                 @endforeach
                                             </div>
                                             @if(count($allPhotos) > 1)
-                                                <button class="carousel-control-prev" type="button" data-bs-target="#photosCarousel{{ $jersey->id }}" data-bs-slide="prev">
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#photosCarousel{{ $jersey->slug }}" data-bs-slide="prev">
                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                     <span class="visually-hidden">Previous</span>
                                                 </button>
-                                                <button class="carousel-control-next" type="button" data-bs-target="#photosCarousel{{ $jersey->id }}" data-bs-slide="next">
+                                                <button class="carousel-control-next" type="button" data-bs-target="#photosCarousel{{ $jersey->slug }}" data-bs-slide="next">
                                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                     <span class="visually-hidden">Next</span>
                                                 </button>

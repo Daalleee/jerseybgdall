@@ -83,7 +83,7 @@
                     <h5>Form Pembelian</h5>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('transactions.buy', $jersey->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('transactions.buy', $jersey->slug) }}" enctype="multipart/form-data">
                         @csrf
                         
                         <div class="mb-3">

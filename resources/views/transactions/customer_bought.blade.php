@@ -25,7 +25,7 @@
                         <tbody>
                             @foreach($pembelian as $transaksi)
                             <tr>
-                                <td>#{{ $transaksi->id }}</td>
+                                <td>{{ $transaksi->transaction_code }}</td>
                                 <td>{{ $transaksi->jersey->name }}</td>
                                 <td><span class="text-success fw-bold">Rp{{ number_format($transaksi->jersey->price, 2, ',', '.') }}</span></td>
                                 <td>{{ Str::limit($transaksi->buyer_address, 30) }}</td>

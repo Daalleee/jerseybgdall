@@ -55,7 +55,7 @@
             <tbody>
                 @forelse($transactions as $transaction)
                     <tr>
-                        <td>#{{ $transaction->id }}</td>
+                        <td>{{ $transaction->transaction_code }}</td>
                         <td>{{ $transaction->jersey->name }}</td>
                         <td>{{ $transaction->user->name }}</td>
                         <td><span class="text-success fw-bold">Rp{{ number_format($transaction->jersey->price, 2, ',', '.') }}</span></td>
@@ -76,7 +76,7 @@
                                 @endif
                                 
                                 @if($transaction->status === 'pending')
-                                    <form action="{{ route('admin.transactions.approve', $transaction->id) }}" method="POST">
+                                    <form action="{{ route('admin.transactions.approve', $transaction->transaction_code) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <!-- Kirim parameter pagination untuk redirect kembali -->
@@ -88,7 +88,7 @@
                                         </button>
                                     </form>
                                     
-                                    <form action="{{ route('admin.transactions.reject', $transaction->id) }}" method="POST">
+                                    <form action="{{ route('admin.transactions.reject', $transaction->transaction_code) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <!-- Kirim parameter pagination untuk redirect kembali -->
