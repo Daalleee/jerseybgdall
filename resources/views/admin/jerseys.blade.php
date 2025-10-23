@@ -64,7 +64,7 @@
             <tbody>
                 @forelse($jerseys as $jersey)
                     <tr>
-                        <td>{{ $jersey->id }}</td>
+                        <td>{{ $jersey->slug }}</td>
                         <td>{{ $jersey->name }}</td>
                         <td><span class="text-success fw-bold">Rp{{ number_format($jersey->price, 2, ',', '.') }}</span></td>
                         <td>
@@ -105,7 +105,7 @@
                         <td>
                             <div class="d-flex flex-column gap-2">
                                 @if($jersey->type === 'sistem')
-                                <a href="{{ route('admin.jerseys.edit', $jersey->id) }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('admin.jerseys.edit', $jersey->slug) }}" class="btn btn-primary btn-sm">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
                                 @endif
@@ -115,13 +115,13 @@
                                     $allPhotos = $jersey->getAllPhotosAttribute();
                                 @endphp
                                 @if(count($allPhotos) > 0)
-                                    <button type="button" class="btn btn-info btn-sm w-100" data-bs-toggle="modal" data-bs-target="#photosModal{{ $jersey->id }}">
+                                    <button type="button" class="btn btn-info btn-sm w-100" data-bs-toggle="modal" data-bs-target="#photosModal{{ $jersey->slug }}">
                                         <i class="fas fa-images"></i> Lihat Foto ({{ count($allPhotos) }})
                                     </button>
                                 @endif
                                 
                                 @if($jersey->status === 'pending_review' && $jersey->type === 'pelanggan')
-                                    <form action="{{ route('admin.jerseys.approve', $jersey->id) }}" method="POST" class="mb-2">
+                                    <form action="{{ route('admin.jerseys.approve', $jersey->slug) }}" method="POST" class="mb-2">
                                         @csrf
                                         @method('PUT')
                                         <!-- Kirim parameter pagination untuk redirect kembali -->
@@ -133,7 +133,7 @@
                                         </button>
                                     </form>
                                     
-                                    <form action="{{ route('admin.jerseys.reject', $jersey->id) }}" method="POST" class="mb-2">
+                                    <form action="{{ route('admin.jerseys.reject', $jersey->slug) }}" method="POST" class="mb-2">
                                         @csrf
                                         @method('PUT')
                                         <!-- Kirim parameter pagination untuk redirect kembali -->
@@ -152,7 +152,7 @@
                                     </a>
                                 @endif
                                 
-                                <form action="{{ route('admin.jerseys.destroy', $jersey->id) }}" method="POST">
+                                <form action="{{ route('admin.jerseys.destroy', $jersey->slug) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-outline-danger btn-sm w-100" onclick="return confirm('Yakin ingin menghapus jersey ini?')">
@@ -168,11 +168,11 @@
                         $allPhotos = $jersey->getAllPhotosAttribute();
                     @endphp
                     @if(count($allPhotos) > 0)
-                        <div class="modal fade" id="photosModal{{ $jersey->id }}" tabindex="-1" aria-labelledby="photosModalLabel{{ $jersey->id }}" aria-hidden="true">
+                        <div class="modal fade" id="photosModal{{ $jersey->slug }}" tabindex="-1" aria-labelledby="photosModalLabel{{ $jersey->slug }}" aria-hidden="true">
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="photosModalLabel{{ $jersey->id }}">Foto - {{ $jersey->name }}</h5>
+                                        <h5 class="modal-title" id="photosModalLabel{{ $jersey->slug }}">Foto - {{ $jersey->name }}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">

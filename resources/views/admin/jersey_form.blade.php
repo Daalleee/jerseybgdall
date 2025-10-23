@@ -10,7 +10,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" action="{{ isset($jersey) ? route('admin.jerseys.update', $jersey->id) : route('admin.jerseys.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ isset($jersey) ? route('admin.jerseys.update', $jersey->slug) : route('admin.jerseys.store') }}" enctype="multipart/form-data">
                         @csrf
                         @if(isset($jersey))
                             @method('PUT')
